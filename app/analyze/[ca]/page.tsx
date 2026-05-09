@@ -5,6 +5,13 @@ import { AlphaCard } from "@/components/AlphaCard";
 import { WarningBadge } from "@/components/WarningBadge";
 import { formatNumber, formatPercent, formatPrice, shortenAddress } from "@/lib/utils";
 
+export const dynamic = "force-dynamic";
+
+const baseUrl =
+  process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : "http://localhost:3001";
+
 const holderTypeConfig = {
   smart_trader: {
     label: "Smart Traders",
@@ -68,7 +75,9 @@ function FriendlyErrorCard() {
 }
 
 export default async function AnalyzePage({ params }: AnalyzePageProps) {
-  const response = await fetch(`http://localhost:3001/api/analyze/${params.ca}`);
+  const response = await fetch(`${baseUrl}/api/analyze/${params.ca}`, {
+    cache: "no-store",
+  });
 
   if (!response.ok) {
     return <FriendlyErrorCard />;

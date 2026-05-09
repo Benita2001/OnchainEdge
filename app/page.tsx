@@ -2,7 +2,13 @@ import { CAInputWrapper } from "@/components/CAInputWrapper";
 import { Header } from "@/components/Header";
 import { TokenCard } from "@/components/TokenCard";
 
+export const dynamic = "force-dynamic";
+
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+const baseUrl =
+  process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : "http://localhost:3001";
 
 interface TrendingToken {
   address: string;
@@ -17,7 +23,7 @@ interface TokenSignal {
 }
 
 async function getTrendingTokens(): Promise<TrendingToken[]> {
-  const response = await fetch("http://localhost:3001/api/trending", {
+  const response = await fetch(`${baseUrl}/api/trending`, {
     next: { revalidate: 60 },
   });
 
@@ -29,7 +35,7 @@ async function getTrendingTokens(): Promise<TrendingToken[]> {
 }
 
 async function getSignalForToken(address: string): Promise<TokenSignal | null> {
-  const response = await fetch(`http://localhost:3001/api/analyze/${address}`, {
+  const response = await fetch(`${baseUrl}/api/analyze/${address}`, {
     next: { revalidate: 60 },
   });
 
