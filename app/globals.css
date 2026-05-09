@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0d0d0d;
+  --surface: #111111;
+  --surface-elevated: #161616;
+  --border: #1f1f1f;
+  --border-strong: #262626;
+  --text-primary: #f0f0f0;
+  --text-secondary: #888888;
+  --text-muted: #444444;
+  --green: #00ff88;
+  --red: #ff3b3b;
+  --yellow: #ffc107;
+  --purple: #f5c000;
+  --accent: #f5c000;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--bg);
+}
+
+body {
+  margin: 0;
+  background: #000000;
+  color: var(--text-primary);
+  font-family: "Inter", sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+.mono {
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    "Courier New",
+    monospace;
+}
+
+.cursor-blink {
+  display: inline-block;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+    opacity: 0.6;
+  }
+}
+
+@keyframes floatDelayed {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translateY(-15px) rotate(-3deg);
+    opacity: 0.5;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseGlow {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+.float-letter {
+  animation: float 6s ease-in-out infinite;
+}
+
+.float-letter-2 {
+  animation: floatDelayed 8s ease-in-out infinite;
+}
+
+.float-letter-3 {
+  animation: float 10s ease-in-out infinite;
+}
+
+.animate-fade-in {
+  animation: fadeIn 1s ease forwards;
+}
+
+.animate-fade-in-delay {
+  animation: fadeIn 1s ease forwards;
+  animation-delay: 0.5s;
+  opacity: 0;
+}
+
+.animate-fade-in-delay-2 {
+  animation: fadeIn 1s ease forwards;
+  animation-delay: 1s;
+  opacity: 0;
+}
+
+.glow-pulse {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
