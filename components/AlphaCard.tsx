@@ -27,23 +27,23 @@ export function AlphaCard({
   narrative,
 }: AlphaCardProps) {
   const [loading, setLoading] = useState(false);
+  const symbol = tokenSymbol.toLowerCase();
 
-  const handleExport = async () => {
+  const handleExportCard = async () => {
     try {
       setLoading(true);
       const response = await fetch(`/api/card/${ca}`);
-
-      if (!response.ok) {
-        return;
-      }
-
       const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = `onchainedge-${tokenSymbol.toLowerCase()}.png`;
-      link.click();
-      window.URL.revokeObjectURL(url);
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `onchainedge-${symbol}.png`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Export failed:", error);
     } finally {
       setLoading(false);
     }
@@ -65,7 +65,7 @@ Check it: https://onchainedge.vercel.app/analyze/${ca}
     <div className="flex flex-wrap gap-3">
       <button
         type="button"
-        onClick={handleExport}
+        onClick={handleExportCard}
         disabled={loading}
         className="border border-[#262626] bg-[#111111] px-4 py-3 text-xs font-bold uppercase tracking-[0.22em] text-[#888888] transition hover:text-white disabled:opacity-60"
         style={{ borderRadius: 6 }}

@@ -1,3 +1,5 @@
+import type { BirdeyeHolderProfile, BirdeyeHolderTag } from "@/lib/types";
+
 export type SignalType =
   | "STRONG_BUY"
   | "BUY"
@@ -12,13 +14,16 @@ export interface SignalResult {
   warnings: string[];
 }
 
-export function computeSignal(holderProfile: any): SignalResult {
+export function computeSignal(holderProfile: BirdeyeHolderProfile): SignalResult {
   const tags = Array.isArray(holderProfile?.tags) ? holderProfile.tags : [];
 
-  const smartTrader = tags.find((t: any) => t?.tag === "smart_trader");
-  const sniper = tags.find((t: any) => t?.tag === "sniper");
-  const bundler = tags.find((t: any) => t?.tag === "bundler");
-  const insider = tags.find((t: any) => t?.tag === "insider");
+  const findTag = (tagName: BirdeyeHolderTag["tag"]) =>
+    tags.find((tag) => tag?.tag === tagName);
+
+  const smartTrader = findTag("smart_trader");
+  const sniper = findTag("sniper");
+  const bundler = findTag("bundler");
+  const insider = findTag("insider");
   const buyVol = Number(holderProfile?.token?.buy_volume_1h ?? 0);
   const sellVol = Number(holderProfile?.token?.sell_volume_1h ?? 0);
   const totalVolume = buyVol + sellVol;

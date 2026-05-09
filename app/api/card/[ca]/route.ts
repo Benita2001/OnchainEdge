@@ -14,7 +14,10 @@ const signalColors: Record<string, string> = {
   STRONG_SELL: "#ff3b3b",
 };
 
-const fontPath = path.join(process.cwd(), "app/fonts/GeistVF.woff");
+const fontPath = path.join(
+  process.cwd(),
+  "node_modules/next/dist/compiled/@vercel/og/noto-sans-v27-latin-regular.ttf",
+);
 const fontDataPromise = readFile(fontPath);
 
 function el(
@@ -270,7 +273,7 @@ export async function GET(
     height: 630,
     fonts: [
       {
-        name: "Geist",
+        name: "Noto Sans",
         data: fontData,
         weight: 400,
         style: "normal",

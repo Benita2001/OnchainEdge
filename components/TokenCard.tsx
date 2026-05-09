@@ -5,10 +5,11 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { SignalBadge } from "@/components/SignalBadge";
+import type { BirdeyeTrendingToken } from "@/lib/types";
 import { formatNumber, formatPrice } from "@/lib/utils";
 
 interface TokenCardProps {
-  token: any;
+  token: BirdeyeTrendingToken;
   signal?: {
     signal: string;
     confidence: number;
@@ -28,7 +29,8 @@ export function TokenCard({ token, signal }: TokenCardProps) {
   const router = useRouter();
   const [imageError, setImageError] = useState(false);
 
-  const logoSrc = token?.logoURI ?? token?.logo_uri ?? null;
+  const rawLogoSrc = token?.logoURI ?? token?.logo_uri ?? null;
+  const logoSrc = typeof rawLogoSrc === "string" && rawLogoSrc.length > 0 ? rawLogoSrc : null;
   const name = token?.name ?? "Unknown Token";
   const symbol = token?.symbol ?? "UNKNOWN";
   const price = Number(token?.price ?? 0);

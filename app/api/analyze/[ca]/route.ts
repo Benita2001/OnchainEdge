@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 
+import type { BirdeyeHolderTag } from "@/lib/types";
 import {
   getHolderProfile,
   getMarketData,
@@ -58,9 +59,11 @@ export async function GET(
   }
 
   const signal = holderProfile ? computeSignal(holderProfile) : null;
-  const smartTrader = holderProfile?.tags?.find((t: any) => t?.tag === "smart_trader");
-  const bundler = holderProfile?.tags?.find((t: any) => t?.tag === "bundler");
-  const sniper = holderProfile?.tags?.find((t: any) => t?.tag === "sniper");
+  const findTag = (tagName: BirdeyeHolderTag["tag"]) =>
+    holderProfile?.tags?.find((tag) => tag?.tag === tagName);
+  const smartTrader = findTag("smart_trader");
+  const bundler = findTag("bundler");
+  const sniper = findTag("sniper");
   const buyVolume = Number(holderProfile?.token?.buy_volume_1h ?? 0);
   const sellVolume = Number(holderProfile?.token?.sell_volume_1h ?? 0);
   const buyPressure =

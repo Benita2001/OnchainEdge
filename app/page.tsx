@@ -160,7 +160,7 @@ export default async function Home() {
                 color: "rgba(200, 150, 0, 0.6)",
               }}
             >
-              // HOLDER · INTELLIGENCE · SOLANA
+              {"// HOLDER · INTELLIGENCE · SOLANA"}
             </div>
 
             <h1
