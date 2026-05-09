@@ -31,13 +31,13 @@ export async function GET(
   const ca = params.ca;
 
   const overview = await getTokenOverview(ca);
-  await delay(1100);
+  await delay(300);
   const priceHistory = await getPriceHistory(ca);
-  await delay(1100);
+  await delay(300);
   const marketData = await getMarketData(ca);
-  await delay(1100);
+  await delay(300);
   const holderProfile = await getHolderProfile(ca);
-  await delay(1100);
+  await delay(300);
   const topHolders = await getTopHolders(ca);
 
   console.log("overview status:", overview ? "data" : "null");
